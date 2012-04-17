@@ -1,64 +1,37 @@
 # Alchemist
 
-Doing conversions for you so you don't have to google them and making code more readable.  
+Doing conversions for you so you don't have to google them; making code more readable.  
 
 Having code that looks like this is meaningless
 
-<pre>miles = 8 * 1609.344</pre>
+    miles = 8 * 1609.344;
 
 You could add comments
 
-<pre>miles = 8 * 1609.344 # converting meters to miles</pre>
+    miles = 8 * 1609.344; // converting meters to miles
 
-But why not have this!
+But why not have this?
 
-<pre>8.meters.to.miles</pre>
+    var convert = require('alchemist').convert;
+    
+    convert(8, 'meters', 'miles');
 
-You can even perform mathematical operations
+Handling bytes conforms to the JEDEC memory standard
 
-<pre>10.kilometers + 1.mile # 11.609344 kilometers</pre>
-
-Handling bytes now works according to the JEDEC memory standard
-
-<pre>1.kb.to.b.to_f == 1024.0</pre>
+   convert(1, 'kb', 'b') == 1024.0;
 
 To switch to the IEC memory standard, force SI units with
 
-<pre>Alchemist::use_si = true</pre>
+    Alchemist.use_si = true;
 
-<strong>You may also register your own units</strong>
+## Registering your own units
 
-<pre>Alchemist.register(:distance, [:beard_second, :beard_seconds], 5.angstroms)</pre>
-
-
-Thanks to <a href='http://github.com/simonmenke'>simonmenke</a> you can now do comparisons without having to convert to floats like so:
-
-<pre>5.grams == 0.005.kilograms</pre>
+    Alchemist.register('distance', ['beard_second', 'beard_seconds'], 5, 'angstroms')
 
 
-h2. Installation
+## Alchemist has conversions for:
 
-<pre>
-gem sources -a http://gemcutter.org
-sudo gem install alchemist
-</pre>
-
-h2. Usage
-
-<pre>
-require 'rubygems'
-require 'alchemist'	
-</pre>
-
-Or if you're using rails
-
-<pre>
-config.gem 'alchemist', :source => 'http://gemcutter.org'
-</pre>
-
-h2. Alchemist has conversions for:
-
-h3. Distance
+### Distance
 
 * metres or meters
 * fermis
@@ -85,7 +58,7 @@ h3. Distance
 * points
 * printer_points
 
-h3. Mass
+### Mass
 
 * grams or grammes
 * carats
@@ -98,7 +71,7 @@ h3. Mass
 * metric_tons
 * tons or short_tons
 
-h3. Volume
+### Volume
 
 * litres or liters
 * barrels
@@ -118,4 +91,6 @@ h3. Volume
 * tablespoons
 * teaspoons
 
-h3. And many more checkout *lib/alchemist.rb* for the rest
+### And many more
+
+Check out `lib/alchemist.js` for the rest.
