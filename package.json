@@ -1,0 +1,21 @@
+{
+  "name": "alchemist",
+  "version": "0.0.0",
+  "author": "Derek Kastner <dkastner@gmail.com>",
+  "description": "Unit conversions - inspired by alchemist Ruby gem",
+  "homepage": "http://github.com/dkastner/alchemist.js",
+  "main": "lib/alchemist.js",
+  "dependencies": {
+    "underscore": "*"
+  },
+  "devDependencies": {
+    "vows": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dkastner/alchemist.js.git"
+  },
+  "engines": {
+    "node": "*"
+  }
+}
