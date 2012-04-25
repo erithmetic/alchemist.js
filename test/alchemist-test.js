@@ -15,11 +15,11 @@ assert.approximately = function(test, base, deviation) {
   assert.isTrue(test <= upperBound, 'Expected ' + test + ' to be approximately ' + base + ', within ' + deviation);
 };
 
-vows.describe('addUnits').addBatch({
-  'bits and bytes': function() {
-    assert.equal(65, addUnits(1, 'bit', 8, 'bytes'));
-  }
-});
+//vows.describe('addUnits').addBatch({
+  //'bits and bytes': function() {
+    //assert.equal(65, addUnits(1, 'bit', 8, 'bytes'));
+  //}
+//}).export(module);
 
   //'division
     //assert.equal(2.meters / 1.meters, 2.0)
@@ -50,8 +50,9 @@ vows.describe('addUnits').addBatch({
 vows.describe('Alchemist').addBatch({
   '.convert': {
     'bits and bytes': function() {
+      Alchemist.useSi = false
       assert.equal(convert(1, 'bit', 'bytes' ), 0.125)
-      assert.approximately(convert(1, 'MB', 'kB'),  1024.0, 0.00001)
+      assert.approximately(convert(1, 'MB', 'kB'),   1024.0, 0.00001)
       assert.approximately(convert(1, 'MB', 'b'),    8388608.0, 0.00001)
       assert.approximately(convert(1, 'GB', 'B'),    1073741824.0, 0.00001)
       assert.approximately(convert(1, 'MiB', 'KiB'), 1024.0, 0.00001)
@@ -65,16 +66,13 @@ vows.describe('Alchemist').addBatch({
     },
     
     'feet to miles': function() {
-      assert.equal(
-        convert(5280, 'feet', 'miles'),
-        convert(1, 'mile', 'feet'));
+      assert.equal(convert(5280, 'feet', 'miles'), 1);
+      assert.equal(convert(1, 'mile', 'feet'), 5280);
     },
     
     'acres to yards_squared': function() {
-      assert.approximately(
-        convert(4840, 'square_yards', 'f'),
-        convert(1, 'acre', 'square_yards'),
-        0.00001);
+      assert.approximately(convert(4840, 'square_yards', 'acres'), 1, 0.00001);
+      assert.approximately(convert(1, 'acre', 'square_yards'), 4840, 0.00001);
     },
     
     'gallon to liter': function() {
@@ -86,12 +84,13 @@ vows.describe('Alchemist').addBatch({
     },
     
     'temperature': function() {
-      assert.approximately(convert(1, 'fahrenheit', 'celsius'), 2.0, 0.00001);
+      assert.approximately(convert(1, 'fahrenheit', 'celsius'), -17.22222, 0.00001);
+      assert.approximately(convert(1, 'celsius', 'fahrenheit'), 33.79999, 0.00001);
     },
     
     'density': function() {
-      assert.equal(convert(1.1058, 'sg', 'brix'), 25);
-      assert.equal(convert(13.87, 'brix', 'baume'), 25);
+      assert.approximately(convert(1.1058, 'sg', 'brix'), 25, 0.001);
+      assert.approximately(convert(13.87, 'brix', 'baume'), 25, 0.001);
     }
   },
 
